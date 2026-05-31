@@ -90,8 +90,3 @@ export class UIManager {
   }
 }
 
-// Bootstrap
-document.addEventListener("DOMContentLoaded", () => {
-  window.uiManager = new UIManager();
-  window.uiManager.init();
-});

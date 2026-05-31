@@ -113,7 +113,7 @@ export class PlayerManager {
     if (!this.audioPlayer || !this.progressContainer) return;
     const rect = this.progressContainer.getBoundingClientRect();
     const pos = (e.clientX - rect.left) / rect.width;
-    (window.bibleTTS ? window.bibleTTS.getCurrentAudio() : null)?.currentTime = pos * (window.bibleTTS ? window.bibleTTS.getCurrentAudio() : null)?.duration;
+const _audio = window.bibleTTS ? window.bibleTTS.getCurrentAudio() : null; if (_audio) { _audio.currentTime =  pos * (window.bibleTTS ? window.bibleTTS.getCurrentAudio() : null)?.duration;; }
   }
 
   formatTime(seconds) {
@@ -124,8 +124,3 @@ export class PlayerManager {
   }
 }
 
-// Bootstrap
-document.addEventListener("DOMContentLoaded", () => {
-  window.playerManager = new PlayerManager();
-  window.playerManager.init();
-});
