@@ -12,7 +12,7 @@ export class BibleManager {
     this.passageTitle = document.getElementById("passageTitle");
     this.passageReference = document.getElementById("passageReference");
     this.passageContent = document.getElementById("passageContent");
-    this.explorerFilters = document.querySelectorAll(".explorer-filter-btn");
+    this.explorerFilters = document.querySelectorAll(".btn-filter");
   }
 
   async init() {
