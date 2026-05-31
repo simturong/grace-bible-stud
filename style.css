@@ -1,0 +1,1996 @@
+/* style.css - Luxury Warm Sepia, Gold & Velvet Theme for Uijeongbu JoongAng Methodist Church */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@300;400;500;600;700;900&display=swap');
+
+:root {
+  /* Default: Modern Olive Theme (🌿 모던 올리브 - Default active on load) */
+  --bg-color: #F7F5F0;
+  --card-bg: #FFFFFF;
+  --primary-color: #3B5E4F;
+  --primary-light: #EBF0EC;
+  --accent-color: #6B7F75;
+  --gold-foil: transparent;
+  --text-main: #2A332E;
+  --text-muted: #5C6E65;
+  --border-color: #E0E6E2;
+  
+  --shadow-sm: 0 4px 12px rgba(59, 94, 79, 0.04);
+  --shadow-md: 0 10px 30px rgba(59, 94, 79, 0.07);
+  --shadow-lg: 0 12px 40px rgba(59, 94, 79, 0.12);
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Background linen paper dual-direction canvas weave texture */
+  --bg-image: 
+    linear-gradient(90deg, rgba(59, 94, 79, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(59, 94, 79, 0.02) 1px, transparent 1px),
+    radial-gradient(rgba(59, 94, 79, 0.03) 1px, transparent 1px);
+    
+  /* Gradients */
+  --border-gradient: linear-gradient(135deg, #CBD5D0 0%, #EBF0EC 50%, #B4C2AF 100%);
+  --cross-gradient: linear-gradient(135deg, #A2B9AF 0%, #3B5E4F 50%, #25332C 100%);
+
+  /* Canvas styles */
+  --canvas-bg: #F5F7F6;
+  --canvas-grid: rgba(59, 94, 79, 0.05);
+
+  /* Player styles */
+  --player-bg: rgba(247, 245, 240, 0.85);
+  --player-border: rgba(59, 94, 79, 0.25);
+
+  /* Active highlight & Halo glow styles */
+  --highlight-bg: #F4F7F5;
+  --highlight-border: rgba(59, 94, 79, 0.6);
+  --glow-color: 59, 94, 79;
+  --glow-bg-50: #ECF2EE;
+
+  /* Font Family definitions */
+  --font-serif: 'Nanum Myeongjo', 'Noto Serif KR', Georgia, serif;
+  --font-sans: 'Inter', 'Noto Sans KR', sans-serif;
+
+  /* Line-height settings for elder readability */
+  --lh-small: 1.8;
+  --lh-medium: 1.95;
+  --lh-large: 2.1;
+}
+
+/* ==========================================
+   Premium Theme Definitions
+   ========================================== */
+
+/* 1. Modern Olive Theme (🌿 모던 올리브) */
+body.theme-modern-olive {
+  --bg-color: #F7F5F0;
+  --card-bg: #FFFFFF;
+  --primary-color: #3B5E4F;
+  --primary-light: #EBF0EC;
+  --accent-color: #6B7F75;
+  --gold-foil: transparent;
+  --text-main: #2A332E;
+  --text-muted: #5C6E65;
+  --border-color: #E0E6E2;
+  
+  --shadow-sm: 0 4px 12px rgba(59, 94, 79, 0.04);
+  --shadow-md: 0 10px 30px rgba(59, 94, 79, 0.07);
+  --shadow-lg: 0 12px 40px rgba(59, 94, 79, 0.12);
+  
+  --bg-image: 
+    linear-gradient(90deg, rgba(59, 94, 79, 0.02) 1px, transparent 1px),
+    linear-gradient(rgba(59, 94, 79, 0.02) 1px, transparent 1px),
+    radial-gradient(rgba(59, 94, 79, 0.03) 1px, transparent 1px);
+    
+  --border-gradient: linear-gradient(135deg, #CBD5D0 0%, #EBF0EC 50%, #B4C2AF 100%);
+  --cross-gradient: linear-gradient(135deg, #A2B9AF 0%, #3B5E4F 50%, #25332C 100%);
+
+  --canvas-bg: #F5F7F6;
+  --canvas-grid: rgba(59, 94, 79, 0.05);
+
+  --player-bg: rgba(247, 245, 240, 0.85);
+  --player-border: rgba(59, 94, 79, 0.25);
+
+  --highlight-bg: #F4F7F5;
+  --highlight-border: rgba(59, 94, 79, 0.6);
+  --glow-color: 59, 94, 79;
+  --glow-bg-50: #ECF2EE;
+}
+
+
+/* Base resets & premium typography */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  /* Repeating premium linen paper dual-direction canvas weave texture */
+  background-image: var(--bg-image);
+  background-size: 16px 16px, 16px 16px, 8px 8px;
+  background-position: 0 0, 0 0, 4px 4px;
+  color: var(--text-main);
+  font-family: var(--font-serif);
+  transition: var(--transition-smooth);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 140px; /* Crucial padding so floating player doesn't hide content */
+}
+
+/* 3-Step Font Scalable UI definitions (Cures elder resizing bug) */
+html.font-size-small, body.font-size-small {
+  font-size: 15px; /* Base for rem */
+  --bible-font-size: 1.1rem;
+  --meditation-font-size: 1.0rem;
+  --current-line-height: var(--lh-small);
+}
+
+html.font-size-medium, body.font-size-medium {
+  font-size: 17px; /* Base for rem */
+  --bible-font-size: 1.4rem;
+  --meditation-font-size: 1.25rem;
+  --current-line-height: var(--lh-medium);
+}
+
+html.font-size-large, body.font-size-large {
+  font-size: 20px; /* Base for rem */
+  --bible-font-size: 1.75rem;
+  --meditation-font-size: 1.55rem;
+  --current-line-height: var(--lh-large);
+}
+
+/* Standard Layout Containers */
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  flex: 1;
+}
+
+
+
+
+/* Header styling */
+header {
+  margin-bottom: 2rem;
+  background: var(--card-bg);
+  padding: 1.75rem 2rem;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  z-index: 2;
+}
+
+.church-font {
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 800;
+}
+
+.golden-cross {
+  background: var(--cross-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  filter: drop-shadow(0 2px 4px rgba(var(--glow-color), 0.4));
+  display: inline-block;
+  animation: crossGleam 4s infinite ease-in-out;
+}
+
+@keyframes crossGleam {
+  0%, 100% { filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.4)) brightness(1); }
+  50% { filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.7)) brightness(1.2) scale(1.05); }
+}
+
+.app-title {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+}
+
+.app-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+
+/* Premium Gold Foil Border Style using double layering */
+.gold-border {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid transparent !important;
+  box-shadow: 0 8px 30px rgba(122, 78, 58, 0.08) !important;
+  z-index: 2;
+}
+
+.gold-border::before {
+  content: '';
+  position: absolute;
+  top: -1.5px; left: -1.5px; right: -1.5px; bottom: -1.5px;
+  background: var(--border-gradient);
+  border-radius: 17px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.8;
+  transition: var(--transition-smooth);
+}
+
+.gold-border:hover::before {
+  opacity: 1;
+  filter: brightness(1.15) drop-shadow(0 2px 6px rgba(var(--glow-color), 0.2));
+}
+
+
+/* Font Scaling Toggle Controller */
+.control-panel-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.control-panel {
+  display: flex;
+  gap: 0.5rem;
+  background-color: var(--primary-light);
+  padding: 0.35rem;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.control-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  padding-left: 0.85rem;
+  padding-right: 0.35rem;
+}
+
+.btn-font-toggle {
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.btn-font-toggle:hover {
+  background-color: rgba(122, 78, 58, 0.08);
+  color: var(--primary-color);
+}
+
+.btn-font-toggle.active {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(122, 78, 58, 0.15);
+}
+
+/* Tab Navigation buttons menu */
+.tabs-container {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 2px;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.tab-button:hover {
+  color: var(--primary-color);
+  background-color: rgba(122, 78, 58, 0.04);
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+  background-color: var(--card-bg);
+}
+
+.tab-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Tab contents animation */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: cardFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 1. Bible Card Component */
+.bible-card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.passage-header {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--primary-light);
+  padding-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.passage-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.passage-chapter-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  font-style: italic;
+  margin-left: 0.5rem;
+}
+
+.passage-reference {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.passage-content {
+  line-height: var(--current-line-height);
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+}
+
+/* Individual Verse Styling */
+.verse {
+  position: relative;
+  padding: 0.6rem 0.5rem 0.6rem 2.2rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+
+.verse-num {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  user-select: none;
+}
+
+.verse-text {
+  font-weight: 400;
+  color: var(--text-main);
+  display: inline;
+  vertical-align: middle;
+  font-size: var(--bible-font-size) !important;
+}
+
+.verse:hover {
+  background-color: rgba(197, 160, 89, 0.06);
+  border-color: rgba(197, 160, 89, 0.2);
+}
+
+/* TTS Verse Play Button inside verse */
+.btn-play-verse {
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin-left: 0.75rem;
+  transition: var(--transition-smooth);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+}
+
+.btn-play-verse:hover {
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  transform: scale(1.2);
+}
+
+/* holyHaloGlow: Breathtaking golden halo pulsation for active verses */
+.verse.active-highlight {
+  background-color: var(--highlight-bg);
+  border: 1px solid var(--highlight-border) !important;
+  animation: holyHaloGlow 2.5s infinite ease-in-out;
+}
+
+@keyframes holyHaloGlow {
+  0% {
+    box-shadow: 0 0 12px rgba(var(--glow-color), 0.25), inset 0 0 8px rgba(var(--glow-color), 0.05);
+    border-color: rgba(var(--glow-color), 0.5);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(var(--glow-color), 0.75), inset 0 0 15px rgba(var(--glow-color), 0.15);
+    border-color: rgba(var(--glow-color), 0.95);
+    background-color: var(--glow-bg-50);
+  }
+  100% {
+    box-shadow: 0 0 12px rgba(var(--glow-color), 0.25), inset 0 0 8px rgba(var(--glow-color), 0.05);
+    border-color: rgba(var(--glow-color), 0.5);
+  }
+}
+
+.reading-hint-box {
+  background-color: rgba(122, 78, 58, 0.04);
+  border-left: 4px solid var(--primary-color);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 1.5rem;
+}
+
+/* 2. Meditation Card Component */
+.meditation-card {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.meditation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--primary-light);
+  padding-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.meditation-title-label {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.meditation-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-nav-meditation {
+  background-color: transparent;
+  border: 1px solid var(--border-color);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  color: var(--text-muted);
+}
+
+.btn-nav-meditation:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.meditation-day {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  text-transform: uppercase;
+}
+
+.meditation-quote-box {
+  background-color: var(--bg-color);
+  border-left: 4px solid var(--accent-color);
+  padding: 1.25rem 1.5rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+
+.meditation-quote-text {
+  font-family: var(--font-serif);
+  font-size: calc(var(--meditation-font-size) * 0.95) !important;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.meditation-quote-ref {
+  display: block;
+  text-align: right;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  margin-top: 0.4rem;
+  font-weight: 700;
+}
+
+.meditation-content-text {
+  font-family: var(--font-serif);
+  font-size: var(--meditation-font-size) !important;
+  color: var(--text-main);
+  line-height: 1.9;
+  margin-bottom: 2rem;
+}
+
+.meditation-prayer-box {
+  background-color: rgba(197, 160, 89, 0.04);
+  border: 1px dashed rgba(197, 160, 89, 0.4);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.prayer-title {
+  font-family: var(--font-serif);
+  font-size: var(--meditation-font-size) !important;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.meditation-prayer-text {
+  font-family: var(--font-serif);
+  font-size: calc(var(--meditation-font-size) * 0.9) !important;
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+/* User Meditation notes input section */
+.reflection-section {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: var(--transition-smooth);
+}
+
+.reflection-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reflection-textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.2rem;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background-color: var(--bg-color);
+  resize: vertical;
+  transition: var(--transition-smooth);
+  line-height: 1.7;
+}
+
+.reflection-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(122, 78, 58, 0.1);
+}
+
+.reflection-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 12px rgba(122, 78, 58, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-primary:hover {
+  background-color: #654030;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(122, 78, 58, 0.22);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* 3. Transcription Calligraphy Component */
+.transcription-section {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 2.2rem;
+  position: relative;
+}
+
+.transcription-subtitle {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  line-height: 1.6;
+}
+
+/* Deep Active Verse typography linkage */
+.transcription-guide-box {
+  background-color: rgba(122, 78, 58, 0.03);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.transcription-guide-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+}
+
+.transcription-guide-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* Canvas board pad container */
+.canvas-outer-container {
+  border: 2px dashed var(--border-color);
+  border-radius: 12px;
+  /* Calligraphy practice grid sheet feel */
+  background-color: var(--canvas-bg);
+  background-image: 
+    linear-gradient(var(--canvas-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--canvas-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  touch-action: none; /* Prevent browser scrolling while writing */
+}
+
+#transcriptionCanvas {
+  display: block;
+  width: 100%;
+  height: 340px;
+  background-color: transparent;
+  cursor: crosshair;
+}
+
+.transcription-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+/* 4. 66 Books Explorer Card Selector component */
+.explorer-section {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.explorer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.explorer-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.explorer-filters {
+  display: flex;
+  gap: 0.3rem;
+  background-color: var(--primary-light);
+  padding: 0.25rem;
+  border-radius: 30px;
+  border: 1px solid var(--border-color);
+}
+
+.btn-filter {
+  background: transparent;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  padding: 0.45rem 1.1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-filter.active {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(122, 78, 58, 0.15);
+}
+
+/* Books group structures */
+.testament-group {
+  margin-bottom: 2.5rem;
+  animation: cardFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testament-group:last-child {
+  margin-bottom: 0;
+}
+
+.testament-group-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 0.5rem;
+}
+
+.bible-category-section {
+  margin-bottom: 1.75rem;
+}
+
+.bible-category-section:last-child {
+  margin-bottom: 0;
+}
+
+.bible-category-title {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.8rem;
+  border-left: 3.5px solid var(--accent-color);
+  padding-left: 0.55rem;
+}
+
+/* Grid Layout */
+.bible-books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+  gap: 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .bible-books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+  }
+}
+
+.btn-book-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.75rem 0.4rem;
+  font-family: var(--font-serif);
+  color: var(--text-main);
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.btn-book-card:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(122, 78, 58, 0.08);
+}
+
+.btn-book-card.active-book {
+  background: var(--primary-light);
+  border-color: var(--gold-foil);
+  border-width: 1.5px;
+  box-shadow: inset 0 0 6px rgba(212, 175, 55, 0.2);
+}
+
+.btn-book-card.active-book .book-abbr {
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.btn-book-card .book-abbr {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.btn-book-card .book-full-name {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* 5. Floating Glassmorphic Audio Player Bar component */
+.floating-player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--player-bg); /* Warm linen glass */
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid var(--player-border); /* Outline */
+  box-shadow: 0 -10px 40px rgba(122, 78, 58, 0.15);
+  padding: 0.9rem 2.2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Progress Ribbon container */
+.player-progress-container {
+  width: 100%;
+  height: 4px;
+  background-color: rgba(122, 78, 58, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.player-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+  transition: width 0.15s linear;
+  border-radius: 2px;
+}
+
+.player-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0; /* Enable flex-truncation inside */
+}
+
+.player-info-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.player-tag {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  background-color: var(--accent-color);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.player-verse-indicator {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.player-verse-text-scroll {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-style: italic;
+  font-weight: 700;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Playback buttons */
+.btn-player-control {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 30px;
+  padding: 0.55rem 1.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 3px 10px rgba(122, 78, 58, 0.16);
+}
+
+.btn-player-control:hover {
+  background-color: #654030;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(122, 78, 58, 0.22);
+}
+
+.btn-player-control.btn-prev,
+.btn-player-control.btn-next {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
+.btn-player-control.btn-prev:hover,
+.btn-player-control.btn-next:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+}
+
+.btn-player-control.btn-voice {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+  position: relative;
+}
+
+.btn-player-control.btn-voice:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+/* Voice Dropdown Settings Popover */
+.player-voice-setting {
+  position: relative;
+}
+
+.voice-dropdown {
+  display: none;
+  position: absolute;
+  bottom: 130%;
+  right: 0;
+  background: #FDFBF9;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 10px 32px rgba(122, 78, 58, 0.16);
+  padding: 1.25rem;
+  width: 290px;
+  z-index: 1010;
+  flex-direction: column;
+  gap: 0.8rem;
+  animation: popUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.voice-dropdown.active {
+  display: flex;
+}
+
+@keyframes popUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header h4 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+}
+
+.dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.dropdown-item label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.dropdown-item select {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: #FFFFFF;
+  color: var(--text-main);
+  outline: none;
+  font-weight: 600;
+}
+
+.dropdown-item select:focus {
+  border-color: var(--primary-color);
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-value {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--primary-color);
+}
+
+.dropdown-item input[type="range"] {
+  width: 100%;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* ── 목록 버튼 ────────────────────────────────────────────────────────────── */
+.btn-player-control.btn-list {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  box-shadow: none;
+}
+
+.btn-player-control.btn-list:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+/* ── 성경 목록 리스트 패널 ────────────────────────────────────────────────── */
+.player-list-panel {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--bg-main, #FDFBF9);
+  border-top: 2px solid var(--accent-color);
+  box-shadow: 0 -8px 32px rgba(122, 78, 58, 0.18);
+  z-index: 999;
+  padding: 1rem 1.25rem 200px; /* 200px: 플레이어 바 높이 확보 */
+  flex-direction: column;
+  gap: 1rem;
+  animation: slideUpPanel 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.player-list-panel.active {
+  display: flex;
+}
+
+@keyframes slideUpPanel {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* 카테고리 섹션 */
+.plist-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.plist-category {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.3rem;
+}
+
+/* 책 그리드 */
+.plist-book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.plist-book-btn {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-section, #FBF7F2);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+}
+
+.plist-book-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.plist-book-btn.active,
+.plist-book-btn.open {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-color: var(--primary-color);
+}
+
+/* 장 선택 패널 */
+.plist-chapter-panel {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-section, #FBF7F2);
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.plist-chapter-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.plist-chapter-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.plist-chapter-btn {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: #ffffff;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plist-chapter-btn:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.plist-chapter-btn.active {
+  background: var(--accent-color);
+  color: #ffffff;
+  border-color: var(--accent-color);
+}
+
+/* Grace Quiz & Transcription Typing Styling */
+.quiz-option-btn {
+  box-shadow: var(--shadow-sm);
+}
+
+.quiz-option-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.quiz-option-btn:active {
+  transform: translateY(0);
+}
+
+.grace-badge-card {
+  transition: var(--transition-smooth);
+}
+
+.grace-badge-card:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3) !important;
+}
+
+@keyframes badgeEarned {
+  from {
+    opacity: 0;
+    transform: scale(0.6) rotate(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Footer Section */
+footer {
+  text-align: center;
+  padding: 2.2rem 0;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Responsive configurations */
+@media (max-width: 768px) {
+  .nav-btn-text { display: none; }
+  .btn-player-control { padding: 0.5rem 0.8rem; font-size: 1rem; }
+  .app-container {
+    padding: 1rem 0.8rem;
+  }
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .tabs-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-button {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.85rem;
+  }
+  .bible-card, .meditation-card, .transcription-section, .explorer-section {
+    padding: 1.5rem 1.2rem;
+  }
+  .floating-player-bar {
+    padding: 0.6rem 1rem;
+  }
+  .player-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .player-info {
+    width: 100%;
+    align-items: center;
+  }
+  .player-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .voice-btn-label {
+    display: none;
+  }
+  .voice-dropdown {
+    right: auto;
+    left: 0;
+    bottom: 140%;
+  }
+}
+
+/* ==========================================
+   Header Control-Panel & Theme Selector
+   ========================================== */
+.header-control-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  z-index: 5;
+}
+
+.theme-selector-container {
+  position: relative;
+}
+
+.theme-select {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background-color: var(--primary-light);
+  border: 1px solid var(--border-color);
+  padding: 0.45rem 1.8rem 0.45rem 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  outline: none;
+  transition: var(--transition-smooth);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%233B5E4F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem center;
+  background-size: 0.75rem;
+}
+
+body.theme-classic-gold .theme-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A4E3A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+body.theme-royal-burgundy .theme-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B1F24' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+body.theme-cozy-dark .theme-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237BA895' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.theme-select:hover {
+  background-color: var(--primary-light);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-select option {
+  background-color: var(--card-bg);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .header-control-panel {
+    align-items: stretch;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+  .theme-selector-container {
+    width: 100%;
+  }
+  .theme-select {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ==========================================
+   Accordion Grid and Chapter Drawer Styles
+   ========================================== */
+.book-item-container {
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.book-item-container.open {
+  grid-column: 1 / -1; /* Spans full width of the category grid */
+  background-color: var(--primary-light);
+  border-radius: 12px;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.chapters-accordion {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+  width: 100%;
+  border: 0 solid transparent;
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  box-sizing: border-box;
+}
+
+.accordion-title-text {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.4rem;
+}
+
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(46px, 1fr));
+  gap: 0.5rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+}
+
+.btn-chapter {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  padding: 0.45rem 0;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-chapter:hover {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+}
+
+.btn-chapter:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   ⛪ 의정부중앙교회 실시간 주간 주보 & 고화질 확대 뷰어 모달 스타일 정의
+   ========================================================================== */
+.jubbo-section {
+  background-color: var(--card-bg);
+  border-radius: 16px;
+  padding: 1.8rem 2.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  transition: var(--transition-smooth);
+}
+
+.jubbo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.6rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.jubbo-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.jubbo-cross {
+  color: var(--accent-color);
+  font-size: 1.15rem;
+}
+
+.jubbo-date {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* 주보 이미지 세로 리스트 컨테이너 */
+.jubbo-vertical-container {
+  position: relative;
+  width: 100%;
+  min-height: 250px;
+  background-color: rgba(122, 78, 58, 0.012);
+  border-radius: 14px;
+  border: 1px solid rgba(122, 78, 58, 0.03);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+/* 로딩 스피너 */
+.jubbo-loader {
+  text-align: center;
+  padding: 3rem;
+}
+
+.jubbo-spinner {
+  width: 44px;
+  height: 44px;
+  border: 4px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  margin: 0 auto 1.2rem;
+  animation: jubboSpin 1s linear infinite;
+}
+
+@keyframes jubboSpin {
+  to { transform: rotate(360deg); }
+}
+
+.jubbo-loading-text {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+/* 에러 안내 카드 */
+.jubbo-error {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.jubbo-error .error-msg {
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #C62828;
+  margin-bottom: 1rem;
+}
+
+/* ⛪ 주보 세로 리스트 본체 (이분할된 이미지 8장 최대 크기 출력) */
+.jubbo-vertical-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2.2rem;
+  padding: 1.5rem 0.5rem;
+  box-sizing: border-box;
+}
+
+/* 개별 세로 주보 이미지 카드 프레임 */
+.jubbo-vertical-card {
+  width: 100%;
+  max-width: 780px; /* PC 해상도 최대 한계선 */
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  cursor: zoom-in;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  aspect-ratio: 1 / 1.414; /* 정교한 A4 용지 비율 고수 */
+  box-sizing: border-box;
+}
+
+.jubbo-vertical-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 12px 36px rgba(122, 78, 58, 0.14);
+  border-color: var(--primary-color);
+}
+
+.jubbo-full-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 이미지 비율 절대 보존 */
+  display: block;
+}
+
+/* 개별 카드 하단 번호 뱃지 */
+.jubbo-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background-color: rgba(122, 78, 58, 0.88);
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* ⛪ 주차 전환 가로 스와이프 뷰포트 컨테이너 */
+.jubbo-viewport {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+/* 스크롤바 숨기기 (깔끔한 무결성 뷰를 위해) */
+.jubbo-viewport::-webkit-scrollbar {
+  display: none;
+}
+.jubbo-viewport {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 주차별 슬라이드 블록 */
+.jubbo-week-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+}
+
+/* 주간 단위 네비게이션 버튼 */
+.btn-jubbo-nav {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+.btn-jubbo-nav:hover {
+  background-color: rgba(59, 94, 79, 0.08);
+  color: var(--primary-color) !important;
+}
+.btn-jubbo-nav.active {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 주보 개별 8장 세로 카드 프레임 (백그라운드 카드박스 제거 및 가로/세로 최대화 비율 개편) */
+.jubbo-vertical-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  background-color: transparent !important; /* 백그라운드 박스 제거 */
+  border: none !important;                  /* 테두리 제거 */
+  border-radius: 0 !important;              /* 라운딩 제거 */
+  box-shadow: none !important;              /* 그림자 제거 */
+  overflow: visible !important;
+  cursor: zoom-in;
+  position: relative;
+  box-sizing: border-box;
+  margin-bottom: 2.5rem;                    /* 시인성을 위해 카드 간 여백 최적화 */
+}
+
+/* 이미지 가로 100% 원래 비율 그대로 무제한 전폭 확대 */
+.jubbo-full-img {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* 홈 탭 복귀 및 몰입형 레이아웃 토글 전용 유틸리티 */
+.hidden-layout {
+  display: none !important;
+}
+
+/* ==========================================
+   ⛪ 고화질 주보 확대 뷰어 모달 팝업 스타일
+   ========================================== */
+.jubbo-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(18, 15, 13, 0.96); /* 매우 어두운 배경 */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 9999; /* 최상단 배치 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: jubboFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+@keyframes jubboFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 닫기 버튼 */
+.jubbo-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 2.8rem;
+  font-weight: 300;
+  cursor: pointer;
+  z-index: 10002;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: all 0.25s ease;
+}
+
+.jubbo-modal-close:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: rotate(90deg);
+}
+
+/* 모달 이미지 콘텐츠 바깥 영역 */
+.jubbo-modal-content {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin-top: 3.5rem;
+  margin-bottom: 4.5rem;
+  overflow: auto; /* 확대 시 가로/세로 네이티브 스크롤 허용 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  position: relative;
+  /* 커스텀 스크롤바 디자인 */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.jubbo-modal-content::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.jubbo-modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.jubbo-modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 모달 본체 고화질 이미지 */
+.jubbo-modal-img {
+  max-width: 96%;
+  max-height: 94%;
+  object-fit: contain;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+  cursor: grab;
+}
+
+.jubbo-modal-img:active {
+  cursor: grabbing;
+}
+
+/* 하단 돋보기 줌 조작 패널 */
+.jubbo-modal-controls {
+  position: absolute;
+  bottom: 40px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.45rem 1rem;
+  border-radius: 35px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 10001;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.btn-modal-zoom {
+  background-color: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.btn-modal-zoom:hover {
+  background-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+.btn-modal-zoom:active {
+  transform: translateY(0);
+}
+
+.zoom-indicator {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
+  min-width: 48px;
+  text-align: center;
+}
+
+/* 하단 가이드 드래그 팁 */
+.jubbo-modal-drag-tip {
+  position: absolute;
+  bottom: 12px;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  pointer-events: none;
+  z-index: 10001;
+}
+
+@media (max-width: 600px) {
+  .jubbo-modal-controls {
+    bottom: 30px;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .btn-modal-zoom {
+    font-size: 0.78rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .jubbo-modal-close {
+    top: 15px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+  }
+  .jubbo-modal-drag-tip {
+    display: none; /* 모바일은 화면 공간 부족으로 생략 */
+  }
+}
+

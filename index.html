@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>의정부중앙교회 - 은혜 성경 공부</title>
+  <meta name="description" content="부모님을 위한 따뜻하고 읽기 편한 66권 입체 성경 공부와 필사 서비스 - 의정부중앙교회">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#7A4E3A">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <!-- Load Nanum Myeongjo & Premium Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="font-size-medium">
+  <div class="app-container">
+    <!-- 글자 크기 조절 패널 (우측 상단 배치) -->
+    <div style="display: flex; justify-content: flex-end; padding: 0.5rem 0 1rem 0;">
+      <div class="control-panel" id="headerFontControlPanel" style="display: flex; align-items: center; gap: 0.15rem; background-color: var(--primary-light); padding: 0.3rem 0.5rem; border-radius: 30px; border: 1px solid var(--border-color); box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+        <span class="control-label" style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); margin-left: 0.4rem; margin-right: 0.4rem; font-family: var(--font-sans);">글자 크기</span>
+        <button type="button" class="btn-font-toggle" data-size="small" id="btnFontSmallHeader" aria-label="글자 크기 보통">가</button>
+        <button type="button" class="btn-font-toggle active" data-size="medium" id="btnFontMediumHeader" aria-label="글자 크기 크게">가+</button>
+        <button type="button" class="btn-font-toggle" data-size="large" id="btnFontLargeHeader" aria-label="글자 크기 가장 크게">가++</button>
+      </div>
+    </div>
+
+    <!-- 4 Main Navigation Tabs Structure (Visually 5 tabs, now including Home/Jubbo as the entry hub) -->
+    <nav class="tabs-container" id="tabsContainer" aria-label="메인 탭 선택 메뉴">
+      <button type="button" class="tab-button active" data-tab="home" id="tabBtnHome" aria-label="홈 및 교회 주보 보기 선택">
+        🏠 홈 / 주보
+      </button>
+      <button type="button" class="tab-button" data-tab="meditation" id="tabBtnMeditation" aria-label="오늘의 묵상 탭 선택">
+        ✍️ 오늘의 묵상
+      </button>
+      <button type="button" class="tab-button" data-tab="explorer" id="tabBtnExplorer" aria-label="성경 공부 66권 바둑판 그리드 탭 선택">
+        🗂️ 성경 공부 (66권)
+      </button>
+      <button type="button" class="tab-button" data-tab="transcription" id="tabBtnTranscription" aria-label="말씀 필사 탭 선택">
+        ✏️ 말씀 필사
+      </button>
+      <button type="button" class="tab-button" data-tab="quiz" id="tabBtnQuiz" aria-label="은혜 퀴즈 탭 선택">
+        ✨ 은혜 퀴즈
+      </button>
+      <!-- Hidden reading tab button to maintain complete app.js state compatibility -->
+      <button type="button" class="tab-button" data-tab="reading" id="tabBtnReading" style="display: none;" aria-hidden="true"></button>
+    </nav>
+
+    <!-- ⛪ 의정부중앙교회 실시간 주간 주보 섹션 (주차 이동 스와이프 개편) -->
+    
+    <!-- Tab 0: Home / Jubbo -->
+    <div class="tab-content active" id="homeTab">
+        <!-- 홈 화면 상단 감성 인사말 헤더 -->
+        <div id="welcomeHeader" style="margin-bottom: 1.5rem; text-align: left; padding: 0.5rem 0.5rem 0 0.5rem; animation: fadeIn 1s ease-out;">
+          <p id="welcomeGreeting" style="font-family: var(--font-sans); font-size: 1.05rem; color: var(--text-muted); margin: 0 0 0.2rem 0; font-weight: 600;">샬롬,</p>
+          <h2 id="welcomeMessage" style="font-family: var(--font-serif); font-size: 1.55rem; color: var(--primary-color); margin: 0; font-weight: 800; letter-spacing: -0.5px; line-height: 1.3;">오늘도 은혜로운 하루 되세요 🙏</h2>
+        </div>
+
+        <!-- 메인 홈 화면 사진 (가치.png 단독 적용) -->
+    <div class="hero-image-container" style="width: 100%; margin-bottom: 1.5rem; text-align: center;">
+      <img src="raw/가치.png" alt="가치 비전" style="width: 100%; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); display: block;">
+    </div>
+    
+    <!-- ⛪ 의정부중앙교회 실시간 주간 주보 섹션 (주차 이동 스와이프 개편) -->
+    <section id="jubboSection" aria-label="주간 교회 주보" style="display: block; width: 100%;">
+      <div class="jubbo-section gold-border" style="margin-bottom: 1rem; padding: 1rem;">
+        <div class="jubbo-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem; margin-bottom: 1rem;">
+          <h3 class="jubbo-title" style="margin: 0;"><span class="jubbo-cross">✝</span> 교회 주보</h3>
+        </div>
+        
+        <div id="jubboContainer" style="display: flex; flex-direction: column; width: 100%;">
+          <div class="jubbo-loader" id="jubboLoader" style="width: 100%; text-align: center; padding: 3rem 0;">
+            <div class="jubbo-spinner"></div>
+            <p class="jubbo-loading-text">주보 데이터를 로딩 중입니다...</p>
+          </div>
+          
+          <div class="jubbo-error" id="jubboError" style="display: none; width: 100%; text-align: center; padding: 3rem 0;">
+            <p class="error-msg">주보 이미지를 불러오지 못했습니다.</p>
+          </div>
+
+          <div class="jubbo-vertical-list" id="jubboVerticalList" style="display: none; flex-direction: column; width: 100%;">
+            <!-- Cards will be injected here -->
+          </div>
+        </div>
+      </div>
+    </section>
+    </div> <!-- End of homeTab -->
+
+    <!-- Tab 1: 365 Daily Meditation & Prayer (Hidden on Load, toggleable via tabs menu) -->
+    <div class="tab-content" id="meditationTab">
+      <!-- Daily 365 Meditation Card -->
+      <div class="meditation-card gold-border">
+        <div class="meditation-header" style="flex-wrap: wrap; gap: 1rem;">
+          <h3 class="meditation-title-label">🕊️ 오늘의 365 말씀 묵상</h3>
+          
+          <!-- Meditations rotative days switcher -->
+          <div class="meditation-nav">
+            <button type="button" class="btn-nav-meditation" id="btnPrevMeditation" aria-label="이전 날짜 묵상 보기">◀ 이전</button>
+            <span class="meditation-day" id="meditationDayLabel">Day 1</span>
+            <button type="button" class="btn-nav-meditation" id="btnNextMeditation" aria-label="다음 날짜 묵상 보기">다음 ▶</button>
+          </div>
+        </div>
+        
+        <div class="meditation-body">
+          <!-- 🔊 오늘의 묵상 오디오 낭독 플레이어 카드 -->
+          <div class="meditation-audio-player-card" style="display: flex; align-items: center; justify-content: space-between; background: rgba(59, 94, 79, 0.05); padding: 0.8rem 1.2rem; border-radius: 12px; margin-bottom: 1.25rem; border: 1px solid rgba(59, 94, 79, 0.15);">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.25rem;">🎧</span>
+              <div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: var(--primary-color);">오늘의 말씀 묵상 전체 낭독</div>
+                <div style="font-size: 0.68rem; color: var(--text-muted);">차분하고 따뜻한 목소리로 들려주는 묵상 오디오</div>
+              </div>
+            </div>
+            <button type="button" class="btn-primary" id="btnPlayMeditationAudio" style="font-size: 0.8rem; font-weight: 800; padding: 0.5rem 1rem; border-radius: 20px; display: inline-flex; align-items: center; gap: 0.3rem;">
+              🔊 낭독 듣기
+            </button>
+          </div>
+          
+          <!-- Bible Verse Quote Block -->
+          <div class="meditation-quote-box">
+            <p class="meditation-quote-text" id="meditationQuote">"여호와는 나의 목자시니 내게 부족함이 없으리로다"</p>
+            <span class="meditation-quote-ref" id="meditationQuoteRef">시편 23:1</span>
+          </div>
+          
+          <!-- Meditation content text -->
+          <p class="meditation-content-text" id="meditationContent">
+            우리의 인생 여정 속에서 부족함을 느낄 때가 많습니다. 그러나 전능하시고 자비로우신 여호와께서...
+          </p>
+          
+          <!-- Short prayer block -->
+          <div class="meditation-prayer-box">
+            <h4 class="prayer-title">🙏 오늘의 다짐과 마치는 기도</h4>
+            <p class="meditation-prayer-text" id="meditationPrayer">
+              사랑의 주님, 나의 삶을 친히 인도해 주시고 보호해 주시는 목자가 되어 주시니 감사합니다...
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Daily Reflection notes input -->
+      <section class="reflection-section gold-border" id="reflectionSection">
+        <h3 class="reflection-title">
+          ✍️ 오늘 말씀 묵상 및 기도 제목 기록하기
+        </h3>
+        <textarea 
+          class="reflection-textarea" 
+          id="reflectionInput" 
+          placeholder="오늘 말씀을 묵상하며 마음에 깊이 와닿은 구절이나, 주님께 올릴 나만의 기도 제목을 정성껏 적고 저장해 보세요. (자동으로 저장됩니다)"
+          aria-label="오늘 말씀 묵상 기록판"
+        ></textarea>
+        <div class="reflection-actions">
+          <button type="button" class="btn-primary" id="btnSaveReflection">💾 묵상 저장하기</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tab 2: 66-Book grid card selector (성경 공부) -->
+    <div class="tab-content" id="explorerTab">
+      <div class="explorer-section gold-border">
+        <div class="explorer-header">
+          <h3 class="explorer-title">🗂️ 성경 66권 전체 탐색</h3>
+          
+          <!-- Filter groups switcher -->
+          <div class="explorer-filters" aria-label="성경 구역 필터">
+            <button type="button" class="btn-filter active" data-filter="all">전체</button>
+            <button type="button" class="btn-filter" data-filter="ot">구약</button>
+            <button type="button" class="btn-filter" data-filter="nt">신약</button>
+          </div>
+        </div>
+        
+        <!-- Categorized books grid container -->
+        <div class="bible-books-grid-container" id="bibleBooksGridContainer">
+          <!-- Injected dynamically via app.js -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-tab detail: Bible Passage Reading (Called dynamically by app.js when book clicked) -->
+    <div class="tab-content" id="readingTab">
+      <!-- Back to 66 books list navigation -->
+      <div class="reading-back-nav" style="margin-bottom: 1.25rem;">
+        <button type="button" class="btn-secondary" onclick="window.graceBibleApp.switchTab('explorer')" style="font-family: var(--font-sans); font-size: 0.9rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.2rem; cursor: pointer; border-radius: 30px;">
+          ↩️ 성경 66권 목록으로 돌아가기
+        </button>
+      </div>
+
+      <!-- Main Bible Reading Card -->
+      <main class="bible-card gold-border" id="bibleCard" style="margin-top: 1rem;">
+        <div class="passage-header">
+          <h2 class="passage-title" id="passageTitle">시편 23편</h2>
+          <span class="passage-reference" id="passageReference">시편 23:1-6 (개역개정)</span>
+        </div>
+        
+        <div class="passage-content" id="passageContent">
+          <!-- Populated dynamically via app.js -->
+        </div>
+      </main>
+      
+      <!-- Fast Quick Navigation tip -->
+      <div class="reading-hint-box">
+        💡 <strong>성경 꿀팁:</strong> 각 구절을 손가락이나 마우스로 가볍게 터치(클릭)하면 <strong>성경 구절 낭독</strong>이 시작되고, 말씀 필사 탭에 해당 구절이 <strong>자동으로 복사</strong>되어 편리하게 필사하실 수 있습니다.
+      </div>
+    </div>
+
+    <!-- Tab 3: Calligraphy Copying drawing Canvas pad & Keyboard Typing transcription -->
+    <div class="tab-content" id="transcriptionTab">
+      <section class="transcription-section gold-border" id="transcriptionSection">
+        <h3 class="reflection-title">
+          ✏️ 오늘 말씀 필사하기 (손글씨 + 타자 필사)
+        </h3>
+        
+        <!-- Deep active typography linkage guide -->
+        <div class="transcription-guide-box">
+          <span class="transcription-guide-label">✍️ 마음에 깊이 새기며 따라 적으실 구절</span>
+          <p class="transcription-guide-text" id="transcriptionGuideText">
+            "여호와는 나의 목자시니 내게 부족함이 없으리로다" (시편 23:1)
+          </p>
+        </div>
+        
+        <!-- Part A: Calligraphy Hand Drawing Canvas -->
+        <div class="calligraphy-canvas-block" style="margin-bottom: 1.5rem;">
+          <h4 class="reflection-title" style="font-size: 1.1rem; margin-bottom: 0.5rem;">
+            🖌️ 마우스나 터치펜으로 붓글씨 연습하기
+          </h4>
+          <p class="transcription-subtitle">
+            아래 빈 칸에 마우스나 손가락으로 오늘의 한 구절이나 마음의 구절을 정성스레 따라 쓰거나 가훈처럼 멋진 필사를 완성해 보세요.
+          </p>
+          
+          <!-- Transcription Canvas Outer container with grid design background -->
+          <div class="canvas-outer-container">
+            <canvas id="transcriptionCanvas" aria-label="성경 말씀 붓글씨 필사지"></canvas>
+          </div>
+  
+          <div class="transcription-actions" style="margin-bottom: 1.5rem;">
+            <button type="button" class="btn-secondary" id="btnClearCanvas" aria-label="필사 내용 전체 지우기">🗑️ 새로 쓰기</button>
+            <button type="button" class="btn-primary" id="btnSubmitDrawing" aria-label="필사 완료 및 제출">🕊️ 필사 완료하기</button>
+          </div>
+        </div>
+
+        <!-- Part B: Keyboard Typing Transcription input section -->
+        <div class="typing-container gold-border" style="margin-top: 2rem; padding: 1.5rem; border-radius: 12px; background: var(--canvas-bg);">
+          <h4 class="reflection-title" style="font-size: 1.1rem; margin-bottom: 0.5rem;">
+            ⌨️ 마음을 담아 손글씨 대신 직접 타자 필사하기
+          </h4>
+          <p class="transcription-subtitle" style="margin-bottom: 0.8rem;">
+            마우스나 터치펜 사용이 불편하시다면, 아래 빈 칸에 위의 말씀을 차분한 마음으로 정성껏 타이핑해 보세요.
+          </p>
+          <textarea 
+            class="reflection-textarea transcription-typing-textarea" 
+            id="transcriptionTypingInput" 
+            placeholder="여기에 위의 성경 구절을 따라 쳐보세요..."
+            aria-label="성경 말씀 타자 필사지"
+            style="min-height: 100px; font-size: 1.05rem;"
+          ></textarea>
+          <!-- Real-time validation message or status -->
+          <div id="typingFeedback" style="font-size: 0.85rem; margin-top: 0.5rem; font-weight: 700; min-height: 1.2rem; color: var(--accent-color);"></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Tab 4: Grace Quiz (Interactive Game Structure) -->
+    <div class="tab-content" id="quizTab">
+      <div class="explorer-section gold-border quiz-section" style="position: relative;">
+        <div class="explorer-header">
+          <h3 class="explorer-title">✨ 오늘의 은혜 퀴즈</h3>
+          <!-- Grace points score display badge -->
+          <div class="grace-points-badge" style="background: var(--primary-light); color: var(--primary-color); border: 1px solid var(--border-color); padding: 0.4rem 0.9rem; border-radius: 20px; font-family: var(--font-sans); font-size: 0.85rem; font-weight: 800; display: inline-flex; align-items: center; gap: 0.4rem;">
+            🏅 은혜 점수: <span id="gracePointsDisplay">0</span>점
+          </div>
+        </div>
+        
+        <!-- Quiz Main Board -->
+        <div class="quiz-board" style="background: var(--canvas-bg); border-radius: 12px; padding: 2rem; border: 1px solid var(--border-color); margin-bottom: 1.5rem; text-align: center;">
+          <!-- Progress indicator -->
+          <div class="quiz-progress-text" style="font-family: var(--font-sans); font-size: 0.85rem; color: var(--accent-color); font-weight: 700; margin-bottom: 0.5rem;">
+            문제 <span id="quizCurrentNum">1</span> / <span id="quizTotalNum">5</span>
+          </div>
+          
+          <!-- Question description -->
+          <h4 id="quizQuestionText" style="font-family: var(--font-serif); font-size: 1.3rem; font-weight: 800; line-height: 1.6; color: var(--text-main); margin-bottom: 2rem;">
+            질문이 로딩 중입니다...
+          </h4>
+          
+          <!-- Multiple Choices Options container -->
+          <div id="quizOptionsContainer" style="display: flex; flex-direction: column; gap: 0.8rem; max-width: 500px; margin: 0 auto;">
+            <!-- Generated dynamically -->
+          </div>
+        </div>
+        
+        <!-- Feedback or Blessing Box after selection -->
+        <div id="quizFeedbackBox" class="gold-border" style="display: none; background: var(--card-bg); border-radius: 12px; padding: 1.5rem; text-align: center; margin-bottom: 1.5rem; animation: popUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+          <div id="quizFeedbackIcon" style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎉</div>
+          <h5 id="quizFeedbackTitle" style="font-family: var(--font-serif); font-size: 1.15rem; font-weight: 800; color: var(--primary-color); margin-bottom: 0.4rem;">정답입니다!</h5>
+          <p id="quizFeedbackText" style="font-family: var(--font-serif); font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+            설명이 들어갑니다.
+          </p>
+          <button type="button" class="btn-primary" id="btnNextQuiz" style="margin: 0 auto; display: flex; align-items: center; gap: 0.4rem;">다음 문제 풀기 ⏭</button>
+        </div>
+        
+        <!-- Badge reward display shelf -->
+        <div class="grace-badges-shelf gold-border" style="background: var(--card-bg); border-radius: 12px; padding: 1.5rem; margin-top: 2rem;">
+          <h4 class="reflection-title" style="font-size: 1.05rem; margin-bottom: 0.8rem;">
+            🎖️ 내가 획득한 은혜 배지
+          </h4>
+          <div id="graceBadgesContainer" style="display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center;">
+            <!-- Badges dynamically added -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page Footer -->
+    <footer>
+      <p>&copy; 2026 의정부중앙교회 은혜 성경 공부. 부모님을 향한 따뜻한 말씀의 공간입니다.</p>
+      <p>모든 성경 본문의 권리는 해당 번역 학회에 있습니다.</p>
+    </footer>
+  </div>
+
+  <!-- 성경 목록 리스트 패널 (플레이어 위에 슬라이드업) -->
+  <div class="player-list-panel" id="playerListPanel" role="dialog" aria-label="성경 목록 선택 패널">
+    <!-- JS로 동적 렌더링 -->
+  </div>
+
+  <!-- Floating Glassmorphic Audio Player Bar (Positioned beautifully above the bottom tab bar) -->
+  <div class="floating-player-bar" id="floatingPlayerBar">
+    <!-- Progress Ribbon Line -->
+    <div class="player-progress-container" id="playerProgressContainer" aria-label="낭독 진행도">
+      <div class="player-progress-bar" id="playerProgressBar"></div>
+    </div>
+    
+    <div class="player-content">
+      <!-- Left side: Playing verse details -->
+      <div class="player-info">
+        <div class="player-info-meta">
+          <span class="player-tag" id="playerBookTag">시편 23편</span>
+          <span class="player-verse-indicator" id="playerVerseIndicator">1절 낭독 중</span>
+        </div>
+        <div class="player-verse-text-scroll">
+          <span class="player-verse-text" id="playerVerseText">여호와는 나의 목자시니 내게 부족함이 없으리로다</span>
+        </div>
+      </div>
+      
+      <!-- Right side: Playback controls and Settings popover -->
+      <div class="player-controls">
+          <!-- 목록 버튼 -->
+          <button type="button" class="btn-player-control btn-list" id="btnPlayerList" aria-label="성경 목록 열기">
+            ☰ <span class="voice-btn-label">목록</span>
+          </button>
+
+          <!-- Settings button + configurations dropdown popup -->
+          <div class="player-voice-setting">
+            <button type="button" class="btn-player-control btn-voice" id="btnVoiceSetting" aria-label="낭독 목소리 설정 열기">
+              ⚙️ <span class="voice-btn-label">목소리 설정</span>
+            </button>
+            
+            <!-- Dropdown Configurations Popover Menu -->
+            <div class="voice-dropdown" id="voiceDropdown" role="dialog" aria-label="낭독 목소리 상세 설정창" style="width: 300px;">
+              <div class="dropdown-header">
+                <h4>🗣️ 낭독 목소리 설정</h4>
+              </div>
+              
+
+
+              <!-- Preset Korean Voices selection -->
+              <div class="dropdown-item" style="margin-bottom: 0.4rem;">
+                <label for="voiceSelect" style="font-weight: 700;">목소리 유형</label>
+                <select id="voiceSelect" style="margin-top: 0.15rem;">
+                  <option value="sister-voice" selected>👩🍼 자상한 자매님 목소리</option>
+                  <option value="brother-voice">👨🦳 인자한 형제님 목소리</option>
+                </select>
+              </div>
+              
+              <!-- Rate parameter range slider -->
+              <div class="dropdown-item">
+                <div class="slider-header">
+                  <label for="voiceRate" style="font-weight: 700;">낭독 속도</label>
+                  <span class="slider-value" id="rateVal">0.82x</span>
+                </div>
+                <input type="range" id="voiceRate" min="0.6" max="1.4" step="0.05" value="0.82" style="margin-top: 0.15rem;">
+              </div>
+            </div>
+          </div><!-- /player-voice-setting -->
+        
+        <!-- Play / Pause Control Button -->
+        <button type="button" class="btn-player-control btn-play-toggle" id="btnPlayerPlayToggle" aria-label="성경 낭독 재생 및 일시정지">
+          ▶ 재생
+        </button>
+        
+        <!-- Next Verse Control Button -->
+        <button type="button" class="btn-player-control btn-next" id="btnPlayerNext" aria-label="다음 구절 낭독">
+          ⏭ 다음 구절
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core App State & Dynamic Databases Loading -->
+  <script type="module" src="js/modules/UIManager.js"></script>
+  <script type="module" src="js/modules/PlayerManager.js"></script>
+  <script src="js/data/bibleBooks.js"></script>
+  <script src="js/data/meditationData.js"></script>
+  <script src="app.js"></script>
+  <!-- HTML5 Canvas calligraphic drawing pad script -->
+  <script src="canvas-drawing.js"></script>
+  <!-- Web Speech TTS logic & Floating Player bindings -->
+  <script src="bible-tts.js"></script>
+
+  <!-- Interactive typing real-time validation script -->
+  <script>
+    (function() {
+      const typingInput = document.getElementById('transcriptionTypingInput');
+      const typingFeedback = document.getElementById('typingFeedback');
+      
+      if (!typingInput) return;
+
+      typingInput.addEventListener('input', () => {
+        const guideTextEl = document.getElementById('transcriptionGuideText');
+        if (!guideTextEl) return;
+        
+        // Standardize both strings (remove quotes, whitespace, newlines, and punctuations)
+        const guideClean = guideTextEl.textContent.replace(/["\s\(\)\d절\.,·!？\?]/g, '');
+        const inputClean = typingInput.value.replace(/["\s\(\)\d절\.,·!？\?]/g, '');
+        
+        if (inputClean.length === 0) {
+          typingFeedback.textContent = '';
+          return;
+        }
+        
+        // Compare prefix
+        const isPrefixMatch = guideClean.startsWith(inputClean);
+        
+        if (guideClean === inputClean) {
+          typingFeedback.style.color = '#C5A059'; // Golden Sepia
+          typingFeedback.textContent = '🎉 완벽하게 필사하셨습니다! 마음 판에 새겨진 귀한 말씀입니다.';
+        } else if (isPrefixMatch) {
+          typingFeedback.style.color = '#2ECC71'; // Green
+          typingFeedback.textContent = '✍️ 바르게 타이핑하고 계십니다. 계속 이어나가세요!';
+        } else {
+          typingFeedback.style.color = '#E74C3C'; // Red
+          typingFeedback.textContent = '💡 오타가 있습니다. 앞뒤 구절을 다시 한번 확인해 보세요.';
+        }
+      });
+    })();
+  </script>
+
+  <!-- Interactive Grace Quiz Script -->
+  <script>
+    (function() {
+      const quizQuestions = [
+        {
+          question: "시편 23편 1절의 말씀으로, '여호와는 나의 ○○시니 내게 부족함이 없으리로다'에서 빈칸에 들어갈 알맞은 말은 무엇일까요?",
+          options: ["목자", "방패", "요새", "피난처"],
+          answer: 0,
+          explanation: "시편 23:1 말씀입니다. 여호와는 우리를 푸른 풀밭과 쉴 만한 물 가로 인도해주시는 좋으신 '목자'이십니다. 🐑"
+        },
+        {
+          question: "다음 구절은 성경의 어떤 책에 기록된 말씀일까요?\n'태초에 하나님이 천지를 창조하시니라'",
+          options: ["출애굽기", "레위기", "창세기", "요한계시록"],
+          answer: 2,
+          explanation: "창세기 1장 1절 말씀으로, 온 우주 만물의 아름다운 시작을 알리는 거룩한 선포입니다. 🌌"
+        },
+        {
+          question: "데살로니가전서 5장 16-18절에 나오는 그리스도인의 세 가지 생활 양식 중 '쉬지 말고' 해야 하는 것은 무엇일까요?",
+          options: ["기뻐하라", "기도하라", "감사하라", "묵상하라"],
+          answer: 1,
+          explanation: "항상 기뻐하고, '쉬지 말고 기도하고', 범사에 감사하라는 성경의 가르침입니다. 🙏"
+        },
+        {
+          question: "여호수아 1장 9절 말씀에서, 주님께서 미지의 길을 떠나는 여호수아에게 하신 위로의 말씀은 '강하고 ○○하라'입니다. 빈칸은?",
+          options: ["온유", "겸손", "담대", "안심"],
+          answer: 2,
+          explanation: "여호수아 1:9 말씀입니다. '강하고 담대하라 두려워하지 말며 놀라지 말라 네가 어디로 가든지 네 하나님 여호와가 너와 함께 하느니라' 🛡️"
+        },
+        {
+          question: "성경 66권 중 가장 마지막에 위치하며, 사도 요한이 기록한 예언서의 이름은 무엇일까요?",
+          options: ["요한일서", "사도행전", "로마서", "요한계시록"],
+          answer: 3,
+          explanation: "요한계시록 22장에는 '보라 내가 속히 오리니'라고 약속하시는 예수님의 영광스러운 재림 약속이 담겨 있습니다. 🕊️"
+        }
+      ];
+
+      let currentQuestionIdx = 0;
+      let gracePoints = parseInt(localStorage.getItem('grace-quiz-points') || '0', 10);
+      let earnedBadges = JSON.parse(localStorage.getItem('grace-quiz-badges') || '[]');
+
+      const badgesMetadata = [
+        { name: "말씀의 첫걸음", desc: "첫 퀴즈를 완료함", icon: "🌱", minPoints: 10 },
+        { name: "믿음의 파수꾼", desc: "은혜 점수 50점 달성", icon: "🛡️", minPoints: 50 },
+        { name: "말씀의 탐험가", desc: "은혜 점수 100점 달성", icon: "🧭", minPoints: 100 },
+        { name: "은혜의 충만", desc: "은혜 점수 150점 달성", icon: "✨", minPoints: 150 },
+        { name: "성경 거장", desc: "은혜 점수 250점 달성", icon: "👑", minPoints: 250 }
+      ];
+
+      const elPoints = document.getElementById('gracePointsDisplay');
+      const elCurrentNum = document.getElementById('quizCurrentNum');
+      const elTotalNum = document.getElementById('quizTotalNum');
+      const elQuestionText = document.getElementById('quizQuestionText');
+      const elOptionsContainer = document.getElementById('quizOptionsContainer');
+      const elFeedbackBox = document.getElementById('quizFeedbackBox');
+      const elFeedbackIcon = document.getElementById('quizFeedbackIcon');
+      const elFeedbackTitle = document.getElementById('quizFeedbackTitle');
+      const elFeedbackText = document.getElementById('quizFeedbackText');
+      const elNextQuizBtn = document.getElementById('btnNextQuiz');
+      const elBadgesContainer = document.getElementById('graceBadgesContainer');
+
+      function updateBadgeShelf() {
+        if (!elBadgesContainer) return;
+        elBadgesContainer.innerHTML = '';
+        
+        // Update earned badges based on current points
+        badgesMetadata.forEach(badge => {
+          if (gracePoints >= badge.minPoints && !earnedBadges.includes(badge.name)) {
+            earnedBadges.push(badge.name);
+          }
+        });
+        localStorage.setItem('grace-quiz-badges', JSON.stringify(earnedBadges));
+
+        if (earnedBadges.length === 0) {
+          elBadgesContainer.innerHTML = `<span style="font-size: 0.9rem; color: var(--text-muted); font-style: italic;">아직 획득한 배지가 없습니다. 퀴즈를 맞추어 은혜 점수를 획득해 보세요!</span>`;
+          return;
+        }
+
+        earnedBadges.forEach(badgeName => {
+          const meta = badgesMetadata.find(b => b.name === badgeName);
+          if (!meta) return;
+
+          const badgeDiv = document.createElement('div');
+          badgeDiv.className = 'grace-badge-card';
+          badgeDiv.setAttribute('title', meta.desc);
+          badgeDiv.style.cssText = `
+            background: var(--primary-light);
+            border: 1px solid var(--gold-foil);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.15);
+            animation: badgeEarned 0.5s ease-out;
+          `;
+          badgeDiv.innerHTML = `
+            <span style="font-size: 1.5rem;">${meta.icon}</span>
+            <div style="text-align: left;">
+              <div style="font-size: 0.85rem; font-weight: 800; color: var(--primary-color);">${meta.name}</div>
+              <div style="font-size: 0.7rem; color: var(--text-muted);">${meta.desc}</div>
+            </div>
+          `;
+          elBadgesContainer.appendChild(badgeDiv);
+        });
+      }
+
+      function loadQuestion(idx) {
+        if (!elQuestionText) return;
+        
+        // Hide feedback box
+        if (elFeedbackBox) elFeedbackBox.style.display = 'none';
+        
+        const q = quizQuestions[idx];
+        elCurrentNum.textContent = idx + 1;
+        elTotalNum.textContent = quizQuestions.length;
+        elQuestionText.textContent = q.question;
+        
+        elOptionsContainer.innerHTML = '';
+        q.options.forEach((opt, oIdx) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn-secondary quiz-option-btn';
+          btn.style.cssText = `
+            text-align: left;
+            padding: 0.9rem 1.3rem;
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: all 0.25s ease;
+          `;
+          
+          btn.addEventListener('mouseenter', () => {
+            btn.style.borderColor = 'var(--primary-color)';
+            btn.style.background = 'var(--primary-light)';
+          });
+          btn.addEventListener('mouseleave', () => {
+            btn.style.borderColor = 'var(--border-color)';
+            btn.style.background = 'var(--card-bg)';
+          });
+
+          btn.textContent = `${oIdx + 1}. ${opt}`;
+          
+          btn.addEventListener('click', () => selectAnswer(oIdx));
+          elOptionsContainer.appendChild(btn);
+        });
+      }
+
+      function selectAnswer(optIdx) {
+        const q = quizQuestions[currentQuestionIdx];
+        const isCorrect = optIdx === q.answer;
+        
+        // Disable options
+        const optButtons = elOptionsContainer.querySelectorAll('.quiz-option-btn');
+        optButtons.forEach(btn => {
+          btn.disabled = true;
+          btn.style.opacity = '0.6';
+          btn.style.cursor = 'default';
+        });
+        
+        // Highlight selection
+        const selectedBtn = optButtons[optIdx];
+        selectedBtn.style.opacity = '1';
+        
+        if (isCorrect) {
+          selectedBtn.style.background = '#E8F5E9';
+          selectedBtn.style.borderColor = '#2ECC71';
+          selectedBtn.style.color = '#1B5E20';
+          
+          // Add points
+          gracePoints += 10;
+          localStorage.setItem('grace-quiz-points', gracePoints);
+          if (elPoints) elPoints.textContent = gracePoints;
+          
+          // Display positive feedback
+          if (elFeedbackIcon) elFeedbackIcon.textContent = "🎉";
+          if (elFeedbackTitle) elFeedbackTitle.textContent = "정답입니다! 은혜 점수 +10점";
+          if (elFeedbackText) elFeedbackText.textContent = q.explanation;
+        } else {
+          selectedBtn.style.background = '#FFEBEE';
+          selectedBtn.style.borderColor = '#E74C3C';
+          selectedBtn.style.color = '#C62828';
+          
+          // Show correct option too
+          const correctBtn = optButtons[q.answer];
+          correctBtn.style.opacity = '1';
+          correctBtn.style.background = '#E8F5E9';
+          correctBtn.style.borderColor = '#2ECC71';
+          correctBtn.style.color = '#1B5E20';
+          
+          // Display retry feedback
+          if (elFeedbackIcon) elFeedbackIcon.textContent = "🙏";
+          if (elFeedbackTitle) elFeedbackTitle.textContent = "아쉽습니다. 다음 기회에!";
+          if (elFeedbackText) elFeedbackText.textContent = q.explanation;
+        }
+        
+        if (elFeedbackBox) elFeedbackBox.style.display = 'block';
+        updateBadgeShelf();
+      }
+
+      if (elNextQuizBtn) {
+        elNextQuizBtn.addEventListener('click', () => {
+          currentQuestionIdx = (currentQuestionIdx + 1) % quizQuestions.length;
+          loadQuestion(currentQuestionIdx);
+        });
+      }
+
+      // Initialize quiz
+      if (elPoints) elPoints.textContent = gracePoints;
+      loadQuestion(0);
+      updateBadgeShelf();
+    })();
+  </script>
+
+  <!-- PWA Service Worker script registration with Cache Busting query parameter -->
+  <script>
+    // === 강제 캐시 완전 파괴 & 최신 파일 즉시 로드 ===
+    // 서비스 워커가 예전 캐시된 파일을 서빙하지 않도록, 기존 SW를 먼저 해제 후 재등록
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        // 기존에 등록된 모든 서비스 워커를 즉시 전면 해제
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          const unregisterAll = registrations.map(reg => reg.unregister());
+          return Promise.all(unregisterAll);
+        }).then(() => {
+          // 모든 캐시 스토리지를 완전 삭제
+          return caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))));
+        }).then(() => {
+          // 최신 서비스 워커를 새 버전으로 재등록 (v=grace-bible-v6 캐시버스팅)
+          return navigator.serviceWorker.register('sw.js?v=grace-bible-v6-fresh');
+        }).then(registration => {
+          console.log('[SW] 최신 서비스 워커 재등록 완료:', registration.scope);
+          registration.update();
+        }).catch(err => {
+          console.error('[SW] 서비스 워커 재등록 오류:', err);
+        });
+      });
+    }
+  </script>
+
+  <!-- ⛪ 주보 크게 보기 고화질 확대 뷰어 모달 팝업 -->
+  <div class="jubbo-modal" id="jubboModal" role="dialog" aria-hidden="true" aria-label="주보 크게 보기" style="display: none;">
+    <button type="button" class="jubbo-modal-close" id="jubboModalClose" aria-label="닫기">×</button>
+    <div class="jubbo-modal-content" id="jubboModalContent">
+      <img src="" id="jubboModalImg" class="jubbo-modal-img" alt="주보 확대 이미지" />
+    </div>
+    <div class="jubbo-modal-controls">
+      <button type="button" class="btn-modal-zoom" id="btnJubboZoomOut" aria-label="축소">🔎 작게</button>
+      <button type="button" class="btn-modal-zoom" id="btnJubboZoomReset" aria-label="원래 크기로">🔄 100%</button>
+      <button type="button" class="btn-modal-zoom" id="btnJubboZoomIn" aria-label="확대">🔍 크게</button>
+      <span class="zoom-indicator" id="jubboZoomIndicator">100%</span>
+    </div>
+    <div class="jubbo-modal-drag-tip">
+      👉 화면을 확대하신 후 마우스로 끌거나 손가락으로 드래그하여 숨겨진 부분을 구석구석 보실 수 있습니다.
+    </div>
+  </div>
+
+  <!-- 클라우드 TTS 연동 스크립트 -->
+  <script src="cloud-tts.js"></script>
+  <script type="module" src="js/modules/JubboManager.js"></script>
+</body>
+</html>

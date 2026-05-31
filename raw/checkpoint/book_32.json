@@ -1,0 +1,14 @@
+{
+  "id": 32,
+  "name": "요나",
+  "eng": "Jonah",
+  "abbr": "욘",
+  "testament": "OT",
+  "totalChapters": 4,
+  "chapters": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": []
+  }
+}

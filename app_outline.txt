@@ -1,0 +1,37 @@
+Line 1585: function loadBibleDatabase() {
+Line 1612: function tryLocalLoad() {
+Line 1627: function cacheIndexMetadata() {
+Line 1646: function loadLatestJubbo() {
+Line 1671: function updateNavButtons(isPrevWeekActive) {
+Line 1895: function tryLoadingJubbo(offsetWeeks) {
+Line 2010: function tryLocalFolderJubbo() {
+Line 2093: function renderJubboPages(pages, title, container) {
+Line 2142: function loadPrevWeekJubbo() {
+Line 2206: function tryLoadingPrevJubboByDate() {
+Line 2309: function tryProcessedJubbo() {
+Line 2397: function openJubboModal(imgUrl, titleText) {
+Line 2420: function closeJubboModal() {
+Line 2431: function updateJubboZoomUI() {
+Line 2459: function bindJubboModalEvents() {
+Line 2585: function init() {
+Line 2715: function bindEventListeners() {
+Line 2935: function setFontSize(size) {
+Line 2962: function switchTab(tabName) {
+Line 2995: function loadPersistedStates() {
+Line 3053: function setTranslation(transName) {
+Line 3063: function updateTranslationUIState(transName) {
+Line 3108: function loadThemeState() {
+Line 3115: function setTheme(themeName) {
+Line 3143: function generateMockPassage(book, chapterNum) {
+Line 3235: function loadBiblePassage(bookId, chapterNum = null) {
+Line 3353: function selectVerse(verseNum, verseElement) {
+Line 3404: function updateTranscriptionCopyGuide(text, bookName, verseNum) {
+Line 3410: function updatePlayerUI(bookName, verseNum, text) {
+Line 3418: function loadMeditationData(dayIndex) {
+Line 3434: function render66BooksGrid(filterType) {
+Line 3641: function triggerPlayerPlayToggle() {
+Line 3658: function triggerPlayerNext() {
+Line 3664: function triggerPlayerPrev() {
+Line 3670: function syncPlayStatus(isPlaying) {
+Line 3677: function updateProgressBar(progressPercent) {
+Line 3684: function renderPlayerListPanel() {
