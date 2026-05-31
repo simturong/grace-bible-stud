@@ -2,7 +2,7 @@
 export class UIManager {
   constructor() {
     this.tabs = document.querySelectorAll(".tab-button");
-    this.sections = document.querySelectorAll("main > section");
+    this.sections = document.querySelectorAll(".tab-content");
     this.fontButtons = document.querySelectorAll(".font-size-btn");
     this.themeToggle = document.getElementById("themeToggle");
   }
@@ -40,10 +40,10 @@ export class UIManager {
     });
 
     this.sections.forEach((sec) => {
-      if (sec.id === tabName + "Section" || sec.id === tabName) {
-        sec.style.display = "block";
+      if (sec.id === tabName + "Tab") {
+        sec.classList.add("active");
       } else {
-        sec.style.display = "none";
+        sec.classList.remove("active");
       }
     });
 
