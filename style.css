@@ -1594,12 +1594,8 @@ body.theme-cozy-dark .theme-select {
    ⛪ 의정부중앙교회 실시간 주간 주보 & 고화질 확대 뷰어 모달 스타일 정의
    ========================================================================== */
 .jubbo-section {
-  background-color: var(--card-bg);
-  border-radius: 16px;
-  padding: 1.8rem 2.2rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  background-color: transparent;
+  padding: 1rem 0;
   transition: var(--transition-smooth);
 }
 
@@ -1707,16 +1703,8 @@ body.theme-cozy-dark .theme-select {
 /* 개별 세로 주보 이미지 카드 프레임 */
 .jubbo-vertical-card {
   width: 100%;
-  max-width: 780px; /* PC 해상도 최대 한계선 */
-  background-color: #FFFFFF;
-  border: 1px solid var(--border-color);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-  cursor: zoom-in;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-  position: relative;
-  aspect-ratio: 1 / 1.414; /* 정교한 A4 용지 비율 고수 */
+  max-width: 100%;
+  background-color: transparent;
   box-sizing: border-box;
 }
 
