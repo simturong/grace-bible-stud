@@ -329,10 +329,15 @@ export class BibleManager {
       p.setAttribute("data-verse", v.num);
       
       const numSpan = document.createElement("span");
-      numSpan.className = "verse-num";
-      numSpan.textContent = v.num;
-      
-      p.appendChild(textSpan);
+        numSpan.className = "verse-num";
+        numSpan.textContent = v.num;
+
+        const textSpan = document.createElement("span");
+        textSpan.className = "verse-text";
+        textSpan.textContent = v.text || v.text_hangul;
+
+        p.appendChild(numSpan);
+        p.appendChild(textSpan);
       
       p.addEventListener("click", () => {
           if (window.bibleTTS && typeof window.bibleTTS.playVerse === "function") {
