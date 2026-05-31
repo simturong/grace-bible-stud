@@ -34,7 +34,7 @@ export class JubboManager {
   renderPages(pages) {
     this.container.innerHTML = '';
     
-    const magicSortIndices = [1, 3, 5, 7, 6, 4, 2, 0];
+    const magicSortIndices = [0, 1, 2, 4, 3, 5, 6, 7];
     const sortedPageLabels = ["1면", "2면", "3면", "4면", "5면", "6면", "7면", "8면"];
 
     magicSortIndices.forEach((targetIndex, sortedIdx) => {
