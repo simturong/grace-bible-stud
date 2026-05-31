@@ -21,9 +21,50 @@
         <button type="button" class="btn-font-toggle" data-size="small" id="btnFontSmallHeader" aria-label="글자 크기 보통">가</button>
         <button type="button" class="btn-font-toggle active" data-size="medium" id="btnFontMediumHeader" aria-label="글자 크기 크게">가+</button>
         <button type="button" class="btn-font-toggle" data-size="large" id="btnFontLargeHeader" aria-label="글자 크기 가장 크게">가++</button>
+      
+        <div style="width: 1px; height: 1.5rem; background-color: var(--border-color); margin: 0 0.5rem;"></div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+<!-- 목록 버튼 -->
+          <button type="button" class="btn-toolbar-control btn-list" style="background:none; border:none; padding:0.4rem; cursor:pointer; display:flex; align-items:center; gap:0.2rem; font-family:var(--font-sans); font-size:0.85rem; font-weight:800; color:var(--text-main);" id="btnPlayerList" aria-label="성경 목록 열기">
+            ☰ <span class="voice-btn-label">목록</span>
+          </button>
+
+          <!-- Settings button + configurations dropdown popup -->
+          <div class="player-voice-setting">
+            <button type="button" class="btn-toolbar-control btn-voice" style="background:none; border:none; padding:0.4rem; cursor:pointer; display:flex; align-items:center; gap:0.2rem; font-family:var(--font-sans); font-size:0.85rem; font-weight:800; color:var(--text-main);" id="btnVoiceSetting" aria-label="낭독 목소리 설정 열기">
+              ⚙️ <span class="voice-btn-label">목소리 설정</span>
+            </button>
+            
+            <!-- Dropdown Configurations Popover Menu -->
+            <div class="voice-dropdown" id="voiceDropdown" role="dialog" aria-label="낭독 목소리 상세 설정창" style="width: 300px;">
+              <div class="dropdown-header">
+                <h4>🗣️ 낭독 목소리 설정</h4>
+              </div>
+              
+
+
+              <!-- Preset Korean Voices selection -->
+              <div class="dropdown-item" style="margin-bottom: 0.4rem;">
+                <label for="voiceSelect" style="font-weight: 700;">목소리 유형</label>
+                <select id="voiceSelect" style="margin-top: 0.15rem;">
+                  <option value="sister-voice" selected>👩🍼 자상한 자매님 목소리</option>
+                  <option value="brother-voice">👨🦳 인자한 형제님 목소리</option>
+                </select>
+              </div>
+              
+              <!-- Rate parameter range slider -->
+              <div class="dropdown-item">
+                <div class="slider-header">
+                  <label for="voiceRate" style="font-weight: 700;">낭독 속도</label>
+                  <span class="slider-value" id="rateVal">0.82x</span>
+                </div>
+                <input type="range" id="voiceRate" min="0.6" max="1.4" step="0.05" value="0.82" style="margin-top: 0.15rem;">
+              </div>
+            </div>
+          </div><!-- /player-voice-setting -->
+        </div>
       </div>
     </div>
-
     <!-- 4 Main Navigation Tabs Structure (Visually 5 tabs, now including Home/Jubbo as the entry hub) -->
     <nav class="tabs-container" id="tabsContainer" aria-label="메인 탭 선택 메뉴">
       <button type="button" class="tab-button active" data-tab="home" id="tabBtnHome" aria-label="홈 및 교회 주보 보기 선택">

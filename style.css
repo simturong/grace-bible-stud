@@ -1991,3 +1991,30 @@ body.theme-cozy-dark .theme-select {
     display: none; /* 모바일은 화면 공간 부족으로 생략 */
   }
 }
+
+
+/* Inline TTS Playback Highlight & Stop Badge */
+.verse.active-highlight {
+  background-color: rgba(197, 160, 89, 0.15) !important;
+  color: var(--primary-color) !important;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 2px 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.verse.active-highlight::after {
+  content: ' ■ 정지';
+  font-size: 0.75rem;
+  color: #E74C3C;
+  font-weight: 800;
+  margin-left: 6px;
+  display: inline-block;
+  vertical-align: middle;
+  background: #FFEBEE;
+  padding: 1px 6px;
+  border-radius: 12px;
+  border: 1px solid #ffcdd2;
+}

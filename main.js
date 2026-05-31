@@ -25,16 +25,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     getCurrentBookId: () => window.bibleManager.currentBookId,
     getCurrentChapterNum: () => window.bibleManager.currentChapterNum,
     bibleBooks: window.bibleBooks,
-    updatePlayerUI: (title) => {
-       const playerBookTag = document.getElementById("playerBookTag");
-       if (playerBookTag) playerBookTag.textContent = title;
-    },
-    syncPlayStatus: (isPlaying) => {
-       if (window.playerManager) window.playerManager.updatePlayState(isPlaying);
-    },
-    updateProgressBar: (pct) => {
-       if (window.playerManager) window.playerManager.updateProgressPct(pct);
-    },
+    updatePlayerUI: () => {},
+    syncPlayStatus: () => {},
+    updateProgressBar: () => {},
     playNextChapter: () => {
        const nextCh = window.bibleManager.currentChapterNum + 1;
        window.bibleManager.loadBiblePassage(window.bibleManager.currentBookId, nextCh);
