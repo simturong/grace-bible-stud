@@ -332,26 +332,13 @@ export class BibleManager {
       numSpan.className = "verse-num";
       numSpan.textContent = v.num;
       
-      const micIcon = document.createElement("span");
-      micIcon.className = "material-icons verse-audio-btn";
-      micIcon.textContent = "mic";
-      micIcon.style.cursor = "pointer";
-      micIcon.addEventListener("click", () => {
-        if (window.bibleTTS && typeof window.bibleTTS.playVerse === "function") {
-          window.bibleTTS.playVerse(p);
-        }
-      });
-      
-      const textSpan = document.createElement("span");
-      textSpan.className = "verse-text";
-      textSpan.textContent = v.text || v.text_hangul;
-      
-      p.appendChild(numSpan);
-      p.appendChild(micIcon);
       p.appendChild(textSpan);
       
       p.addEventListener("click", () => {
-        this.updateTranscriptionCopyGuide(v.text || v.text_hangul, book.name, v.num);
+          if (window.bibleTTS && typeof window.bibleTTS.playVerse === "function") {
+            window.bibleTTS.playVerse(p);
+          }
+          this.updateTranscriptionCopyGuide(v.text || v.text_hangul, book.name, v.num);
         document.querySelectorAll(".verse.active-highlight").forEach(el => el.classList.remove("active-highlight"));
         p.classList.add("active-highlight");
       });
