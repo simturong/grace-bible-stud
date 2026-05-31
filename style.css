@@ -269,7 +269,7 @@ header {
   padding-right: 0.35rem;
 }
 
-.btn-font-toggle {
+.font-size-btn {
   background: transparent;
   border: none;
   font-family: var(--font-sans);
@@ -286,12 +286,12 @@ header {
   transition: var(--transition-smooth);
 }
 
-.btn-font-toggle:hover {
+.font-size-btn:hover {
   background-color: rgba(122, 78, 58, 0.08);
   color: var(--primary-color);
 }
 
-.btn-font-toggle.active {
+.font-size-btn.active {
   background-color: var(--primary-color);
   color: #FFFFFF;
   box-shadow: 0 4px 10px rgba(122, 78, 58, 0.15);
